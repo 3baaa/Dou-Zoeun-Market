@@ -1,0 +1,10 @@
+.box {
+    height: 400px;
+    padding: 100px 0;
+    text-align: center;
+    border: 1px solid silver;
+}
+
+Form{
+    text-align: center;
+}
