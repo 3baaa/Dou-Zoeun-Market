@@ -8,7 +8,7 @@ import LoginRouter from "./Routers/LoginRouter.js";
 import env from "dotenv";
 env.config();
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 //라우팅
 app.use("/auth", LoginRouter);
