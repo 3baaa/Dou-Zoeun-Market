@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Container, Col, Row, Button } from "react-bootstrap";
-import "./Login.scss";
+import "../css/Login.scss";
 
 const Login = (props) => {
   const base_url = process.env.REACT_APP_BASE_URL;
@@ -27,7 +27,16 @@ const Login = (props) => {
             <Row>
               <Col>
                 <img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
-                <Button className="kakao" variant="warning">
+                <Button
+                  className="kakao"
+                  variant="warning"
+                  onClick={() =>
+                    window.open(
+                      `${process.env.REACT_APP_BASE_URL}/auth/kakao`,
+                      "_blank"
+                    )
+                  }
+                >
                   카카오톡으로 로그인 하기
                 </Button>
               </Col>

@@ -1,11 +1,15 @@
 import React from "react";
-import "./Header.css";
+import "../css/Header.scss";
 import Login from "./Login";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const Header = () => {
   const [modalShow, setModalShow] = useState(false);
+  const [loginTitle, setLoginTitle] = useState("로그인/회원가입");
+
+
   return (
     <header>
       <div className="logo-container">
@@ -23,7 +27,7 @@ const Header = () => {
         <span className="vertical-line2"></span>
         <div>좋은톡</div>
         <span className="vertical-line2"></span>
-        <div onClick={() => setModalShow(true)}>로그인/회원가입</div>
+        <div onClick={() => setModalShow(true)}>{loginTitle}</div>
         <Login show={modalShow} onHide={() => setModalShow(false)} />
       </div>
     </header>

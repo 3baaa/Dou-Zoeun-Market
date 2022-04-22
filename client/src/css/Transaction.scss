@@ -1,0 +1,58 @@
+Form {
+  div {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  li {
+    list-style: none;
+  }
+  .list {
+    ul {
+      padding-left: 20px;
+    }
+    padding-left: 0px;
+    font-size: 10px;
+    padding-top: 14px;
+
+    border-radius: 10px;
+    border: solid rgb(216, 216, 216);
+  }
+  .button {
+    width: 100%;
+    border-color: #fae100;
+    border-width: 2px;
+    background-color: #fae100;
+    &:hover {
+      background: #fae100;
+      border-color: #fae100;
+      color: black;
+    }
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none !important;
+      border-color: #fae100 !important;
+    }
+  }
+  .useP {
+    width: 20%;
+  }
+  .changeA {
+    width: 10%;
+  }
+  .addr {
+    display: flex;
+    width: 100%;
+  }
+  .point {
+    display: flex;
+    width: 100%;
+  }
+  .agree {
+    div {
+      font-size: 15px;
+      margin: 20px 0;
+      color: rgb(182, 182, 182);
+    }
+  }
+}

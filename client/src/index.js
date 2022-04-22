@@ -1,13 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { BrowserRouter } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies();
+let getAuthInfo = null;
+const cookie = cookies.get("authCookie");
+
+if (cookies.get("authCookie") != null) {
+  getAuthInfo = cookies.get("authCookie");
+}
+//const auth = window.location.search;
+
+function reducer(state = getAuthInfo, action) {
+  return state;
+}
+let store = createStore(reducer);
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>,
+
   document.getElementById("root")
 );
 

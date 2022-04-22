@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 
-export default function CommentList(){
+export default function Comment(){
 
     const base_url = process.env.REACT_APP_BASE_URL;
-    const [comments, setCommnets] = useState([]);
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${base_url}/shop/:id`);
+                const response = await axios.get(`${base_url}/myPage/comments`);
                 setComments(response.data);
             } catch (e) {
                 console.log(e);
@@ -20,18 +20,7 @@ export default function CommentList(){
 
     return(
         <div> Comments
-            {/*{comments.map(()=>{*/}
-            {/*    <Comment/>*/}
-            {/*});*/}
-            {/*}*/}
-        </div>
-    )
-}
-
-export default function Comment(){
-    return(
-        <div>
-
+            <Comment/>
         </div>
     )
 }

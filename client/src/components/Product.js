@@ -1,41 +1,65 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import Card from "react-bootstrap/Card";
-import axios from "axios";
 import ProductItem from "./ProductItem";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import useFetch from "../hooks/useFetch";
 
-const Product = () => {
+const Product = (props) => {
   const [page, setPage] = useState(1);
-  const [cards, setCards] = useState([]);
+  const { loading, error, list } = useFetch(page, props.url);
+  const loader = useRef(null);
+
+  const handleObserver = useCallback((entries) => {
+    const target = entries[0];
+    console.log(target);
+    if (target.isIntersecting) {
+      setPage((prev) => prev + 1);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/product?page=${page}`);
-        setCards(response.data);
-      } catch (e) {
-        console.log(e);
-      }
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0,
     };
-    fetchData();
-  }, []);
+
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+  }, [handleObserver]);
+
+  useEffect(() => {
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (loader.current) observer.observe(loader.current);
+  }, [handleObserver]);
 
   return (
     <div>
-      <Row style={{ marginLeft: "5%" }}>
-        {cards.map((deliver) => (
-          <Col sm={12} key={deliver.idx}>
-            <Card style={{ width: "18rem", marginBottom: "2rem" }}>
+      <Row>
+        {list.map((deliver) => (
+          <Col sm={3} key={deliver.idx}>
+            <Card
+              style={{ width: "10rem", height: "15rem", marginBottom: "2rem" }}
+            >
               <Card.Body>
                 <Card.Title>
-                  <ProductItem key={deliver.idx} deliver={deliver} />
+                  <ProductItem deliver={deliver} />
                 </Card.Title>
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error!</p>}
+      <div ref={loader} />
     </div>
   );
 };
