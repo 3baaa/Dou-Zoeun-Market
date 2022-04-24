@@ -4,17 +4,25 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import "../../css/Transaction.scss";
 import "../../css/Main.scss";
+import { useParams } from "react-router";
 
 export default function Transaction() {
   const [list, setList] = useState([]);
+  const [prodInfo, setProdInfo] = useState({});
+  const [imgUrl, setImgUrl] = useState();
+  const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}/product/pay`
+          `${process.env.REACT_APP_BASE_URL}/product/pay/${id}`
         );
-        setList(response.data);
+        console.log(id);
+        console.log(response.data[0], response.data[1]);
+        setList(response.data[0]);
+        setProdInfo(response.data[1]);
+        setImgUrl(response.data[1].productImgs[0]);
       } catch (e) {
         console.log(e);
       }
@@ -22,8 +30,12 @@ export default function Transaction() {
     fetchData();
   }, []);
   const commonList = list.map((list) => <li key={list.idx}>{list.Column}</li>);
+
   return (
     <>
+      <div>{/* <img src={imgUrl.imgUrl}></img> */}</div>
+
+      <div>더조은 마켓의 {prodInfo.title}을 구매합니다.</div>
       <hr />
       <Form className="main">
         <fieldset>
@@ -31,7 +43,7 @@ export default function Transaction() {
             <Form.Label>배송지</Form.Label>
             <div className="addr">
               <Form.Control />
-              <Button className="changeA">변경</Button>
+              <Button className="changeA">등록</Button>
             </div>
           </Form.Group>
           <Form.Group className="mb-3">
@@ -50,6 +62,9 @@ export default function Transaction() {
             <Form.Label>결제금액</Form.Label>
             <div className="list">
               <ul>{commonList}</ul>
+              <ul>
+                <li>{prodInfo.price}</li>
+              </ul>
             </div>
           </Form.Group>
           <Form.Group>

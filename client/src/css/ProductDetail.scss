@@ -70,3 +70,38 @@
   margin: -47px 6px 0 3px;
   border-left: 1px solid #d3d3d3;
 }
+
+.common {
+  display: flex;
+  justify-content: space-around;
+  margin-left: -10px;
+}
+
+.commonkey {
+  list-style: circle;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.commonvalue {
+  list-style: none;
+  font-size: 14px;
+}
+
+.qnaform {
+  position: relative;
+}
+
+.qnainput {
+  width: 80%;
+  height: 150px;
+  font-size: 15px;
+  margin-left: 7%;
+}
+
+.qnabutton {
+  position: absolute;
+  bottom: 5px;
+  width: "15%";
+  height: 40px;
+}

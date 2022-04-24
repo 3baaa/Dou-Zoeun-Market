@@ -32,4 +32,5 @@ QnA.associate = () => {
     QnA.belongsTo(Product, { foreignKey: "productId", sourceKey: "idx" });
 };
 
+
 export default QnA;

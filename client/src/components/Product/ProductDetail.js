@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Tabs, Tab } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import Location from "./Location";
-
 import DetailCarousel from "./DetailCarousel";
 import "../../css/ProductDetail.scss";
 
@@ -12,11 +12,12 @@ function ProductDetail() {
   //const [product, setProduct] = useState({ a: null });
   const [color, setColor] = useState("secondary");
   const [product, setProduct] = useState({});
-  const [commonList, setCommonList] = useState({});
+  const [commonList, setCommonList] = useState();
   const [cName, setCName] = useState("");
+  const { id } = useParams();
+  const payUrl = `/pay/${id}`;
   let userId = "";
   let category = "";
-  const { id } = useParams();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,6 +32,7 @@ function ProductDetail() {
         console.log(productInfo);
         setProduct(productInfo);
         setCommonList(commonInfo);
+
         userId = res.data[1].Favorite.userId;
         category = res.data[1].Category.name;
         userId !== null ? setColor("danger") : setColor("secondary");
@@ -50,11 +52,23 @@ function ProductDetail() {
         { idx: id }
       );
       setColor(res.data);
-      console.log(res.data);
     } catch (e) {
       console.log(e);
     }
   };
+
+  const postQna = async () => {
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/product/detail/qna/id`,
+        { idx: id }
+      );
+      setColor(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   console.log(commonList);
   return (
     <div className="productDetail">
@@ -78,18 +92,23 @@ function ProductDetail() {
             <p className="pTitle">{product.title}</p>
             <p className="pPrice">{product.price}원</p>
             <hr />
-            <ul>
-              <li className="productState">
-                상품상태
-                <span className="state">중고</span>
-              </li>
-              <li className="productState">
-                거래지역
-                <i className="fa-solid fa-location-dot"></i>
-                <span className="state">전국</span>
-              </li>
-            </ul>
-            &nbsp;&nbsp;
+            <div className="common">
+              <ul className="commonkey">
+                {commonList ? (
+                  commonList.map((item, id) => {
+                    return <li key={id}>{item.Column}</li>;
+                  })
+                ) : (
+                  <></>
+                )}
+              </ul>
+              <ul className="commonvalue">
+                <li>{product.productStatus}</li>
+                <li>{product.exchange}</li>
+                <li>{product.address}</li>
+                <li>{product.shippingincluded}</li>
+              </ul>
+            </div>
             <Button
               onClick={() => {
                 postProduct();
@@ -97,7 +116,11 @@ function ProductDetail() {
               variant={color}
             >
               찜하기
-            </Button>{" "}
+            </Button>
+            &nbsp;
+            <Link to={payUrl}>
+              <Button variant="primary">결제하기</Button>
+            </Link>
           </div>
         </div>
       </div>
@@ -114,7 +137,15 @@ function ProductDetail() {
           </div>
         </Tab>
         <Tab eventKey="MyFavorite" title={`상품 문의`}>
-          <span>상품 문의</span>
+          <div className="qnaform">
+            <input
+              type="text"
+              placeholder="상품 문의 입력..."
+              className="qnainput"
+            ></input>
+            &nbsp;&nbsp;
+            <button className="qnabutton">등록</button>
+          </div>
         </Tab>
       </Tabs>
     </div>

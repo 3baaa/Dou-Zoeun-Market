@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { Cookies } from "react-cookie";
+import "./index.css";
 
 const cookies = new Cookies();
 let getAuthInfo = null;

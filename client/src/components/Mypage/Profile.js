@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import { Link, Router } from "react-router-dom";
+import axios from "axios";
 import "bootstrap";
 import "../../css/Profile.scss";
 import axios from "axios";
@@ -25,6 +26,7 @@ export default function Profile() {
     const data = await axios.post(`${process.env.REACT_APP_BASE_URL}/mypage/img`,
         {img : profileImg});
     console.log(data.data);
+    });
   };
 
   useEffect(async ()=>{
