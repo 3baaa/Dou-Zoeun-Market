@@ -7,6 +7,7 @@ import Transaction from "./components/Payment/Transaction";
 import { useSelector } from "react-redux";
 import MyPage from "./components/Mypage/MyPage";
 import ProductForm from "./components/Product/ProductForm";
+import Error403 from "./components/ErrorPage/Error403";
 
 function App() {
   //불러올떄 이줄 추가 하시면돼요~!
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/pay" element={<Transaction />}></Route>
         <Route path="/" element={<MainPage />} />
+        <Route path="/403Error" element={<Error403 />} />
         <Route path="/:id" element={<ProductDetail />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/new-product" element={<ProductForm />} />
