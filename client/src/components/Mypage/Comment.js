@@ -9,7 +9,7 @@ export default function Comment(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${base_url}/myPage/comments`);
+                const response = await axios.get(`${base_url}/mypage/comments`);
                 setComments(response.data);
             } catch (e) {
                 console.log(e);
@@ -19,7 +19,7 @@ export default function Comment(){
     }, []);
 
     return(
-        <div> Comments
+        <div >Comment
             <Comment/>
         </div>
     )

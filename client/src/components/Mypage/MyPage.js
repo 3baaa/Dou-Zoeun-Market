@@ -6,10 +6,22 @@ import Product from "../Product/Product";
 import axios from "axios";
 
 export default function MyPage() {
+  const [productNum, setPNum] = useState(0);
+  const [favoriteNum, setFNum] = useState(0);
+  const [commentNum, setCNum] = useState(0);
+  let pNum = ""; let fNum = "";
+
+  useEffect(()=>{
+    number();
+  },[]);
+
+  async function number() {
+    const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/mypage/num`);
+    pNum = res.data[0]; setPNum(pNum);
+    fNum = res.data[1]; setFNum(fNum);
+    console.log(res.data);
+  }
   const getAuthInfo = useSelector((state) => state);
-  const [productNum, setPNum] = useState(10);
-  const [favoriteNum, setFNum] = useState(5);
-  const [commentNum, setCNum] = useState(3);
   const auth = async () => {
     window.location.href = `${process.env.REACT_APP_BASE_URL}/isAuth`;
   };

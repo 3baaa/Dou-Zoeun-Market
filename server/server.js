@@ -53,7 +53,7 @@ app.use("/new", ProductFormRouter);
 
 //db 자동 연결
 db.sequelize
-  .sync({ force: false }) //true이면 매번 테이블 새로 생성
+  .sync({force:false}) //true이면 매번 테이블 새로 생성
   .then(() => {
     app.listen(port, () => console.log(`server is running on ${port}`));
   });

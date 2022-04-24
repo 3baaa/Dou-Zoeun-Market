@@ -1,10 +1,11 @@
-import DataTypes from "sequelize";
+import {DataTypes} from "sequelize";
 import sequelize from "./sq.js";
 import Product from "./Product.js";
 import Comment from "./Comment.js";
 import Favorite from "./Favorite.js";
 import ChatRoom from "./ChatRoom.js";
 import ChatMessage from "./ChatMessage.js";
+import QnA from "./QnA.js";
 
 const User = sequelize.define(
   "User",
@@ -33,7 +34,10 @@ const User = sequelize.define(
     zipCode: {
       type: DataTypes.CHAR(5),
     },
-    address: DataTypes.STRING(30),
+    address: {
+        type : DataTypes.STRING(64),
+        defaultValue: "주소를 설정해놓지 않았습니다"
+    }
   },
 
   //Model 옵션 정의
@@ -48,13 +52,15 @@ const User = sequelize.define(
 );
 
 User.associate = () => {
-  User.hasOne(Product, { foreignKey: "seller", sourceKey: "idx" });
-  User.hasOne(Comment, { foreignKey: "reciever", sourceKey: "idx" });
-  User.hasOne(Comment, { foreignKey: "writer", sourceKey: "idx" });
-  User.hasOne(Favorite, { foreignKey: "userId", sourceKey: "idx" });
-  User.hasOne(ChatRoom, { foreignKey: "seller", sourceKey: "idx" });
-  User.hasOne(ChatRoom, { foreignKey: "buyer", sourceKey: "idx" });
-  User.hasOne(ChatMessage, { foreignKey: "sender", sourceKey: "idx" });
+  User.hasMany(Product, { foreignKey: "seller", sourceKey: "idx" });
+  User.hasMany(Comment, { foreignKey: "receiver", sourceKey: "idx" });
+  User.hasMany(Comment, { foreignKey: "writer", sourceKey: "idx" });
+  User.hasMany(Favorite, { foreignKey: "userId", sourceKey: "idx" });
+  User.hasMany(ChatRoom, { foreignKey: "seller", sourceKey: "idx" });
+  User.hasMany(ChatRoom, { foreignKey: "buyer", sourceKey: "idx" });
+  User.hasMany(ChatMessage, { foreignKey: "sender", sourceKey: "idx" });
+  User.hasMany(QnA, {foreignKey:"writer", sourceKey:"idx"});
+  User.hasMany(QnA, {foreignKey:"reader", sourceKey:"idx"});
 };
 
 export default User;

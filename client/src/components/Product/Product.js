@@ -50,7 +50,7 @@ const Product = (props) => {
             >
               <Card.Body>
                 <Card.Title>
-                  <ProductItem deliver={deliver} />
+                  <ProductItem deliver={deliver} urlName = {props.url} />
                 </Card.Title>
               </Card.Body>
             </Card>

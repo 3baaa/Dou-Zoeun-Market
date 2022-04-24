@@ -26,10 +26,10 @@ const Container = styled.div`
 // eslint-disable-next-line react/prop-types
 const ProductItem = ({ deliver, urlName }) => {
   // eslint-disable-next-line react/prop-types
-  const { idx, ProductImgs, title, price } = deliver;
+  const[product, setProduct] = useState({});
+  const {ProductImgs} = deliver;
 
-  const [product, setProduct] = useState({});
-
+  console.log("urlName : ",urlName);
   useEffect(() => {
     urlName === "/mypage/favorite"
       ? setProduct({
@@ -42,23 +42,23 @@ const ProductItem = ({ deliver, urlName }) => {
           title: deliver.title,
           price: deliver.price,
         });
-  }, []);
+  }, []); 
 
   return (
     <Container>
       <span>
         <div className="thumbnail">
-          <Link to={`/${idx}`}>
+          <Link to={`/${product.idx}`}>
             <img src={ProductImgs[0].imgUrl} alt="thumbnail" />
           </Link>
         </div>
-        <span className="title">{title}</span>
+        <span className="title">{product.title}</span>
         <img
           className="hot"
           src="https://static.wixstatic.com/media/a44461_00e151045404454199cdedcad7c72541~mv2.gif"
         />
         <br />
-        <span className="price_origin">{price}원</span>
+        <span className="price_origin">{product.price}원</span>
       </span>
     </Container>
   );

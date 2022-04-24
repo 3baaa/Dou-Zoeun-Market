@@ -7,14 +7,15 @@ import Product from "./Product.js";
 import ProductImg from "./ProductImg.js";
 import Common from "./Common.js";
 import QnA from "./QnA.js";
-import sequelize from "./sq.js";
+import sequelize from './sq.js';
 
 const db = {};
 db.Category = Category;
-db.Comment = Comment;
-db.Favorite = Favorite;
 db.ChatMessage = ChatMessage;
 db.ChatRoom = ChatRoom;
+db.Comment = Comment;
+db.Common = Common;
+db.Favorite = Favorite;
 db.Product = Product;
 db.ProductImg = ProductImg;
 db.Common = Common;

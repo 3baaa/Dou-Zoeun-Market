@@ -2,7 +2,7 @@ import sequelize from "./sq.js";
 import Product from "./Product.js";
 import User from "./User.js";
 import ProductImg from "./ProductImg.js";
-import DataTypes from "sequelize";
+import {DataTypes} from "sequelize";
 
 const Favorite = sequelize.define(
   "Favorite",
@@ -27,6 +27,7 @@ const Favorite = sequelize.define(
 Favorite.associate = () => {
   Favorite.belongsTo(Product, { foreignKey: "productId", sourceKey: "idx" });
   Favorite.hasMany(ProductImg, { foreignKey: "favoriteId", sourceKey: "idx" });
+  Favorite.belongsTo(User, {foreignKey:"userId", sourceKey:"idx"});
 };
 
 export default Favorite;
