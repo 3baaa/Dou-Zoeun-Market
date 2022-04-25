@@ -1,3 +1,6 @@
+
+// 강지호_카카오 주소 검색과 모달사용 컴포넌트입니다
+
 import REACT, { useState } from "react";
 import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
