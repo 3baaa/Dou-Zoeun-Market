@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import MyPage from "./components/Mypage/MyPage";
 import ProductForm from "./components/Product/ProductForm";
 import Error403 from "./components/ErrorPage/Error403";
+import ChangeProductForm from "./components/Product/ChangeProductForm.js";
 
 function App() {
   //불러올떄 이줄 추가 하시면돼요~!
@@ -24,6 +25,7 @@ function App() {
         <Route path="/:id" element={<ProductDetail />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/new-product" element={<ProductForm />} />
+        <Route path="/change-product/:id" element={<ChangeProductForm />} />
       </Routes>
 
       <Footer />
