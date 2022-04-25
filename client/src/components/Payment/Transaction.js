@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import "../../css/Transaction.scss";
 import "../../css/Main.scss";
 import PointModal from "./PointModal";
-import DaumPost from "./DaumPost";
+import DaumPost from "../Product/DaumPost.js";
 
 export default function Transaction() {
   const { id } = useParams();
