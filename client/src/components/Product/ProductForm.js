@@ -1,3 +1,6 @@
+
+// 강지호_상품 등록 페이지입니다
+
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
