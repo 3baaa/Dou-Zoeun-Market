@@ -4,8 +4,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import "../../css/ProductForm.scss";
-import ImgList from "../Payment/ImgList";
-import DaumPost from "../Payment/DaumPost";
+import ImgList from "./ImgList.js";
+import DaumPost from "./DaumPost.js";
 import axios from "axios";
 
 function ProductForm() {
