@@ -1,44 +1,53 @@
-import express from "express";
+import express, { response } from "express";
 import Product from '../models/Product.js';
-import ProductImg from '../models/ProductImg.js';
 
-const productFormRouter = express.Router();
+const ChangeProductFormRouter = express.Router();
+
+ChangeProductFormRouter.get("/:id", async(req, res) => {
+    const {id} = req.params;
+
+    const data = await Product.findOne({
+        /*
+        include:[{
+            model: ProductImg
+        }],
+        */
+        where : {idx : id}
+    });
+
+    res.send(data);
+});
 
 //await는 async안에서 사용할수 있다
 //await를 사용해야 동기적으로 보낼수 있다
-productFormRouter.post("/", async (req, res) => {
-    console.log(req.body);
+ChangeProductFormRouter.post("/:id", async (req, res) => {
+    const {id }= req.params;
+
     const title = req.body.title;
     const category = req.body.category;
     const address = req.body.address;
+    const status = req.body.status;
     const productStatus = req.body.productStatus;
     const exchange = req.body.exchange;
     const price = req.body.price;
     const shippingIncluded = req.body.shippingIncluded;
     const content = req.body.content;
     const imgs = req.body.imgs;
-
+    
     //Product.create를 사용해서 서버에서 db로 데이터 전송
-     await Product.create({
+     await Product.update({
          title: title,
          categoryId: category,
          address: address,
-         status: "판매중",
+         status: status,
          productStatus: productStatus,
          exchange: exchange,
          price: price,
          shippingIncluded: shippingIncluded,
          content: content
-     });
+     },
+     {where : {idx : id}});
 
-
-    //imgs = [ Img, img ]
-    //img = { id, imageData }
-    for(let i=0; i<imgs.length; i++){
-        ProductImg.create({
-            imgUrl : imgs[i].ImgData,
-        });
-    }
     /*
     imgs.forEach(element => {
          ProductImg.create({
@@ -53,4 +62,4 @@ productFormRouter.post("/", async (req, res) => {
 
 });
 
-export default productFormRouter;
+export default ChangeProductFormRouter;

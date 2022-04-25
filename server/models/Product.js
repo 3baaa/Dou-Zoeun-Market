@@ -18,7 +18,7 @@ const Product = sequelize.define(
     },
     status: {
       type: DataTypes.STRING(1),
-      defaultValue: "N",
+      defaultValue: "판매중",
     },
     title: {
       type: DataTypes.STRING(20),
@@ -47,6 +47,9 @@ const Product = sequelize.define(
     address: {
       type: DataTypes.STRING(64),
     },
+    seller: {
+      type: DataTypes.INTEGER,
+    }
   },
 
   //Model 옵션 정의
