@@ -1,3 +1,6 @@
+
+// 강지호_이미지와 삭제 버튼 나열 컴포넌트입니다
+
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
