@@ -11,7 +11,7 @@ import LogoutRouter from "./Routers/LogoutRouter.js";
 import ProductFormRouter from "./Routers/ProductFormRouter.js";
 import AuthRouter from "./Routers/AuthRouter.js";
 import db from "./models/db.js";
-
+import ChangeProductFormRouter from "./Routers/ChangeProductFormRouter.js";
 env.config();
 
 const app = express();
@@ -50,7 +50,7 @@ app.use("/logout", LogoutRouter);
 app.use("/product", ProductRouter);
 app.use("/mypage", MyPageRouter);
 app.use("/new", ProductFormRouter);
-
+app.use("/change", ChangeProductFormRouter);
 //db 자동 연결
 db.sequelize
   .sync({ force:false}) //true이면 매번 테이블 새로 생성
