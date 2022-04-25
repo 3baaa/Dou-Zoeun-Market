@@ -12,7 +12,7 @@ function ProductForm() {
   const getAuthInfo = useSelector((state) => state);
 
   const count = useRef(0);
-
+  console.log(`idx = ${getAuthInfo.idx}`);
   //이미지외 입력 객체
   const [texts, setTexts] = useState({
     title: "", // 제목
@@ -57,7 +57,7 @@ function ProductForm() {
     reader.onloadend = () => {
       const Img = {
         id: count.current,
-        ImgData: reader.result,
+        imgUrl: reader.result,
       };
       if (Img) {
         setPreviewImgs([...previewImgs, Img]);
