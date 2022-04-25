@@ -14,6 +14,9 @@ const ProductImg = sequelize.define(
     imgUrl: {
       type: DataTypes.STRING(10000),
     },
+    productId:{
+      type: DataTypes.INTEGER
+    },
       favoriteId:{
         type: DataTypes.INTEGER
       }
